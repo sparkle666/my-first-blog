@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+	{% block content %}
+
+		<h2>New Post</h2>
+		<div class="w3-container w3-margin-bottom">
+			<form method="POST">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button type="submit" class="w3-button w3-red">Save</button>
+				
+			</form>
+		</div>
+	{% endblock %}

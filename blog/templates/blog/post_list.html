@@ -1,0 +1,11 @@
+{% extends 'blog/base.html' %}	
+	{% block content %}	
+		{% for post in post %}
+			<div class="w3-card">
+				<h4 class="w3-border-red w3-panel w3-leftbar w3-border"><a href="{% url 'post_details' pk=post.pk %}">{{post.title}}</a></h4>
+				<p class="w3-panel">{{post.body}}</p>
+				<p class="w3-tag"><b>{{post.published_date}}</b></p>
+				<a href="{% url 'post_edit' pk=post.pk %}"><span class="w3-tag w3-red"> Edit</span></a>
+			</div>
+		{% endfor %}
+	{% endblock %}

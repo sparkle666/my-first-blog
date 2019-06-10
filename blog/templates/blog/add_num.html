@@ -1,0 +1,11 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<div class="w3-container">
+		<form method="post">
+			{% csrf_token %}
+			{{form_add.as_p}}
+			<button class="w3-button w3-red" type="submit">Submit</button>
+		</form>
+	<p class="w3-panel w3-green">Your first number is {{num_1}}</p>
+</div>
+{% endblock %}

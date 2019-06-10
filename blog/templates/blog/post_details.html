@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+	<!-- {% if post.published_date %}
+		<p><b>{{post.published_date}}</b></p>
+	{% endif %} -->
+	
+	<h1 class="w3-container w3-red">{{post.title}}</h1>
+	<a href="{% url 'post_edit' pk=post.pk %}"><span class="w3-tag w3-red"> Edit</span></a>
+		<div>
+			<p>{{post.body}}</p>
+			
+		</div>
+	
+{% endblock %}
