@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post
+from .models import Post, Musician
 
 class PostForm(forms.ModelForm):
 	class Meta:
@@ -16,4 +16,3 @@ class Add(forms.Form):
 	num1 = forms.IntegerField()
 	num2 = forms.IntegerField()
 	
-

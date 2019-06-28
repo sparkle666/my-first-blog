@@ -1,11 +1,27 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.utils import timezone
-from .models import Post
+from .models import Post, Musician
 from .forms import ContactForm, PostForm, Add
-from django.contrib.auth.decorators import login_required
+from django.views import View
+from django.views.generic.base import TemplateView
+# from django.contrib.auth import login
 
 # Create your views here.
+
+
+
+class MyTemp(TemplateView):
+	template_name = 'blog/test_class.html'
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['latest'] = Post.objects.all()[:6]
+		return context
+
+class MyView(View):
+	def get(self, request, *args, **kwargs):
+		return HttpResponse("Hello world")
+
 def post_list(request):
 
 	post = Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
@@ -61,17 +77,6 @@ def post_edit(request, pk):
 		form = PostForm(instance=post)
 	return render(request, 'blog/post_edit.html', {'form': form})
 
-def login(request):
-
-	# username = 'not logged in'
-	# if request.method == 'POST':
-	# 	form1 = ContactForm(request.POST)
-	# 	if form1.is_valid():
-	# 		username = form1.cleaned_data['username']
-	# else:
-	form1 = ContactForm()
-	return render(request, 'blog/login.html', {'form1': form1})
-
 def add_new(request):
 	num_1 = 0
 	if request.method == 'POST':
@@ -81,6 +86,8 @@ def add_new(request):
 	else:
 		form_add = Add()
 	return render(request, 'blog/add_num.html', {"form_add": form_add, "num_1": num_1})
+
 def latest(request):
 	post = Post.objects.all()
 	return render(request, 'blog/latest.html', {'post': post})
+
